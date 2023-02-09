@@ -4,6 +4,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {    
     private SpawnManager _spawnManager;
+    private UIManager _uiManager;
+
+    private GameManager _gameManager;
 
     [Header("Common")]
     [SerializeField] private float _speed = 10f;
@@ -26,15 +29,14 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
-    private UIManager _uiManager;
+    
     
     void Start()
     {
-        transform.position  = new Vector3(0, 0, 0);
-
         // _spawnManager = FindObjectOfType<SpawnManager>();
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
 
         if(_spawnManager == null)
@@ -54,6 +56,17 @@ public class Player : MonoBehaviour
         else
         {
             _audioSource.clip = _laserSoundClip;
+        }
+
+        if(_gameManager == null)
+        {
+            Debug.LogError("The Game Manager on the player is NULL");
+        }
+
+        // position
+        if(_gameManager.isCoopMode == false)
+        {
+            transform.position  = new Vector3(0, 0, 0);
         }
     }
 

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver;
+    public bool isCoopMode = false;
 
     void Update()
     {
