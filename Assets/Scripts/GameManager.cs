@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver;
     public bool isCoopMode = false;
+    [SerializeField] private GameObject _pauseMenuPanel;
 
     void Update()
     {
@@ -25,6 +26,12 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            _pauseMenuPanel.SetActive(true);
+            Time.timeScale = 0;
         }
     }
     
