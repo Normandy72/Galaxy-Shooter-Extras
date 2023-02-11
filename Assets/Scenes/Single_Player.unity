@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isGameOver: 0
+  isCoopMode: 0
 --- !u!4 &110969387
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,6 +1043,8 @@ MonoBehaviour:
   _leftEngine: {fileID: 1826943211}
   _rightEngine: {fileID: 1313045129}
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  isPlayerOne: 1
+  isPlayerTwo: 0
 --- !u!212 &1012114233
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ public class Player : MonoBehaviour
 {    
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
-
     private GameManager _gameManager;
 
     [Header("Common")]
@@ -29,6 +28,8 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     private bool _isSpeedBoostActive = false;
     private bool _isShieldActive = false;
+    public bool isPlayerOne = false;
+    public bool isPlayerTwo = false;
     
     
     void Start()
@@ -72,10 +73,24 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        CalculateMovement();
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if(isPlayerOne == true)
         {
-            FireLaser();
+            CalculateMovement();
+
+            if(Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+            {
+                FireLaser();
+            }
+        }
+        
+        if(isPlayerTwo == true)
+        {
+            Player2Movement();
+
+            if(Input.GetKeyDown(KeyCode.RightShift) && Time.time > _canFire)
+            {
+                ShootPlayerTwo();
+            }            
         }
     }
 
@@ -114,7 +129,57 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Player2Movement()
+    {
+        if(Input.GetKey(KeyCode.Keypad8))
+        {
+            transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        }
+
+        if(Input.GetKey(KeyCode.Keypad6))
+        {
+            transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        }
+
+         if(Input.GetKey(KeyCode.Keypad2))
+        {
+            transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        }
+
+        if(Input.GetKey(KeyCode.Keypad4))
+        {
+            transform.Translate(Vector3.left * _speed * Time.deltaTime);
+        }
+        
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+
+        if(transform.position.x > 11.3f)
+        {
+            transform.position = new Vector3(-11.3f, transform.position.y, 0);
+        }
+        else if(transform.position.x < -11.3f)
+        {
+            transform.position = new Vector3(11.3f, transform.position.y, 0);
+        }
+    }
+
     void FireLaser()
+    {
+        _canFire = Time.time + _fireRate;
+
+        if(_isTripleShotActive == true)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
+        }
+
+        _audioSource.Play();
+    }
+
+    void ShootPlayerTwo()
     {
         _canFire = Time.time + _fireRate;
 
