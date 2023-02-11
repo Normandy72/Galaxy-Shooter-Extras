@@ -8,10 +8,19 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
+        if(_isGameOver == true)
         {
-            SceneManager.LoadScene(1);   // current game scene
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                int index = SceneManager.GetActiveScene().buildIndex;   // current game scene
+                SceneManager.LoadScene(index);
+            }
+            else if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene(0);  // main menu
+            }
         }
+        
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
