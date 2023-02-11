@@ -39,4 +39,9 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
     }
+
+    public void HidePauseMenuPanel()
+    {
+        _pauseMenuPanel.SetActive(false);
+    }
 }
