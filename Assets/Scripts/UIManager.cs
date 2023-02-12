@@ -26,6 +26,9 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("Game Manager is NULL");
         }
+
+        bestScore = PlayerPrefs.GetInt("BestScore", 0);
+        _bestScoreText.text = "Best: " + bestScore;
     }
 
     public void UpdateScore(int playerScore)
@@ -38,7 +41,8 @@ public class UIManager : MonoBehaviour
         if(playerScore > bestScore)
         {
             bestScore = playerScore;
-            _bestScoreText.text = "Best: " + bestScore;
+            PlayerPrefs.SetInt("BestScore", bestScore);
+            _bestScoreText.text = "Best: " + bestScore;           
         }
     }
 

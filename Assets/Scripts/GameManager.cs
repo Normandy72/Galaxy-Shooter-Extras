@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public bool isCoopMode = false;
     [SerializeField] private GameObject _pauseMenuPanel;
     private Animator _pauseAnimator;
+    [SerializeField] private TextMeshProUGUI _bestScoreText;
     
 
     void Start()
