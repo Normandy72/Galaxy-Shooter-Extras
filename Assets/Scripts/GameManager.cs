@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
     public bool isCoopMode = false;
     [SerializeField] private GameObject _pauseMenuPanel;
     private Animator _pauseAnimator;
+    
 
     void Start()
     {

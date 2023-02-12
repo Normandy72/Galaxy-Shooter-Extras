@@ -9,9 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _gameOverText;
     [SerializeField] private TextMeshProUGUI _restartText;
+    [SerializeField] private TextMeshProUGUI _bestScoreText;
     [SerializeField] private Sprite[] _liveSprites;
     [SerializeField] private Image _livesImg;
     private GameManager _gameManager;
+    public int bestScore;
 
     void Start()
     {
@@ -29,6 +31,15 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore;
+    }
+
+    public void CheckForBestScore(int playerScore)
+    {
+        if(playerScore > bestScore)
+        {
+            bestScore = playerScore;
+            _bestScoreText.text = "Best: " + bestScore;
+        }
     }
 
     public void UpdateLives(int currentLives)
